@@ -7,7 +7,7 @@ import dash
 from dash_canvas import DashCanvas
 
 class SatelliteOrbitApp:
-    def __init__(self):
+    def __init__(self, spacecraft=None):
         self.app = Dash(__name__)
 
         self.app.layout = html.Div([
@@ -46,6 +46,24 @@ class SatelliteOrbitApp:
         def update_graph_live_callback(n, zoom_chaser, zoom_target, relayoutData, camera_data, current_time_step):
             current_time_step = int(current_time_step) + 1  # Increment the time step
             return self.update_graph_live(n, zoom_chaser, zoom_target, relayoutData, camera_data, current_time_step)
+        self.true_positions_chaser = []
+        self.estimated_positions_chaser = []
+        self.true_positions_target = []
+        self.estimated_positions_target = []
+        self.spacecraft = spacecraft
+
+
+def update_positions(self, position_vector, is_chaser=True, is_true=True):
+    if is_chaser:
+        if is_true:
+            self.true_positions_chaser.append(position_vector)
+        else:
+            self.estimated_positions_chaser.append(position_vector)
+    else:
+        if is_true:
+            self.true_positions_target.append(position_vector)
+        else:
+            self.estimated_positions_target.append(position_vector)
 
     def update_graph_live(self, n, zoom_chaser, zoom_target, relayoutData, camera_data, current_time_step):
         fig = go.Figure()
