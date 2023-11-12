@@ -53,17 +53,17 @@ class SatelliteOrbitApp:
         self.spacecraft = spacecraft
 
 
-def update_positions(self, position_vector, is_chaser=True, is_true=True):
-    if is_chaser:
-        if is_true:
-            self.true_positions_chaser.append(position_vector)
+    def update_positions(self, position_vector, is_chaser=True, is_true=True):
+        if is_chaser:
+            if is_true:
+                self.true_positions_chaser.append(position_vector)
+            else:
+                self.estimated_positions_chaser.append(position_vector)
         else:
-            self.estimated_positions_chaser.append(position_vector)
-    else:
-        if is_true:
-            self.true_positions_target.append(position_vector)
-        else:
-            self.estimated_positions_target.append(position_vector)
+            if is_true:
+                self.true_positions_target.append(position_vector)
+            else:
+                self.estimated_positions_target.append(position_vector)
 
     def update_graph_live(self, n, zoom_chaser, zoom_target, relayoutData, camera_data, current_time_step):
         fig = go.Figure()
